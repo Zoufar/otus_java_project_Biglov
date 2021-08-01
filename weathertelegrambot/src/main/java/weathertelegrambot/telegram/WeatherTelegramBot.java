@@ -1,5 +1,6 @@
 package weathertelegrambot.telegram;
 
+import org.telegram.telegrambots.meta.api.objects.Message;
 import weathertelegrambot.config.TelegramBotProps;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -37,5 +38,17 @@ public class WeatherTelegramBot extends TelegramLongPollingBot {
             logger.debug("onUpdateReceived() - start: updateID = {}", update.getUpdateId());
 
             receiveQueue.add(update);
+    }
+
+    public void sendMessage(String sendText, Message message ){
+
+        String chatId = message.getChatId().toString();
+
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setText(sendText);
+        sendMessage.setChatId(chatId);
+
+        this.sendQueue.add(sendMessage);
+
     }
 }

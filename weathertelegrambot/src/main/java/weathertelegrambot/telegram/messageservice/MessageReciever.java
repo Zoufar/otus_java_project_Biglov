@@ -31,8 +31,10 @@ public class MessageReciever implements Runnable {
                 logger.debug("New update to analyze in queue " + update.toString());
 
                 Message receivedMessage = update.getMessage();
-                String sendText = findHandler (receivedMessage);
-                logger.info("onUpdateReceived() - reciever trace: sendText = {}", sendText);
+                String result = findHandler (receivedMessage);
+                if (result.equals("Nope")){
+                    weatherTelegramBot.sendMessage("The command is'nt handled", receivedMessage);
+                }
             }
             try {
                 Thread.sleep(WAIT_FOR_NEW_MESSAGE_DELAY);
@@ -48,7 +50,7 @@ public class MessageReciever implements Runnable {
                 .map(handler -> handler.handle(receivedMessage))
                 .filter(StringUtils::isNotBlank)
                 .findAny()
-                .orElse("No matching handler");
+                .orElse("Nope");
     }
 
 }

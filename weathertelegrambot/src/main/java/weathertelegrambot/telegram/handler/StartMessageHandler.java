@@ -15,25 +15,21 @@ public class StartMessageHandler implements MessageHandler {
 
     @Override
     public String handle(Message message) {
-        if (message.hasText() &&
-                (message.getText().startsWith("/start")||message.getText().startsWith("/help"))) {
-            String chatId = message.getChatId().toString();
-            SendMessage sendMessage = new SendMessage();
-            sendMessage.setChatId(chatId);
-            if (message.getText().startsWith("/start")) {
-                String sendMessageText = "Здравствуйте! Отправьте Ваши координаты, плизз ";
-                sendMessage.setText(sendMessageText);
-                weatherTelegramBot.sendQueue.add(sendMessage);
-                return sendMessageText;
-            } else {
-                String sendMessageText = "Чтобы отправить Ваши координаты, " +
-                        "используйте иконку \"прикрепить\" в правом углу строки ввода, " +
-                        "далее выберите \"Location\"";
-                sendMessage.setText(sendMessageText);
-                weatherTelegramBot.sendQueue.add(sendMessage);
+        if (message.hasText() && (message.getText().startsWith("/start")
+                || message.getText().startsWith("/help"))) {
+            String sendMessageText = "Здравствуйте! Отправьте Ваши координаты, плизз ";
+            if (message.getText().startsWith("/help")) {
+                sendMessageText = "Чтобы отправить Ваши координаты, " +
+                        "используйте иконку \"прикрепить\" в правом углу строки ввода, "
+                       +"далее выберите \"Location\";\n"
+                       +"или введите команду \n"
+                       + "/coord <широта><пробел><долгота>\n"
+                       + "где широта и долгота вводятся как +/- числа "
+                       + "с разделителем дробной части- точкой";
+            }
+                weatherTelegramBot.sendMessage(sendMessageText, message);
                 return sendMessageText;
             }
-        }
         return StringUtils.EMPTY;
     }
 }

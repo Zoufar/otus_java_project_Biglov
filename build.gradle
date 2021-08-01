@@ -15,7 +15,7 @@ idea {
 }
 
 allprojects {
-    group "ot_ja_20_09_project_spring"
+    group "otus-java-project-Biglov"
 
     repositories {
         mavenLocal()
@@ -39,13 +39,9 @@ allprojects {
             failOnVersionConflict()
         }
         resolutionStrategy {
-            force("javax.servlet:servlet-api:2.4")
             force("commons-logging:commons-logging:1.1.1")
             force("commons-lang:commons-lang:2.5")
-            force("org.codehaus.jackson:jackson-core-asl:1.8.8")
-            force("org.codehaus.jackson:jackson-mapper-asl:1.8.3")
-            force("org.codehaus.jettison:jettison:1.1")
-            force("org.json:json:20160810")
+
         }
     }
 }
