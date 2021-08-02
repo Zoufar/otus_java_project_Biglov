@@ -1,0 +1,1 @@
+worker: java -Dapp.telegram-bot.yandexapikey=69a573be-78f6-4216-a3e2-d76e1df68964 -Dapp.telegram-bot.ompapikey=ecce5222bd800bafe4a5792d853d11d0 -Dapp.telegram-bot.token=1905552468:AAG3P7y2By2wy5pIjcp4Xf_8Ju_uldckSK8 -jar weathertelegrambot/build/libs/weathertelegrambot.jar

@@ -1,0 +1,7 @@
+app:
+  telegram-bot:
+    name: "weather_telling_bot"
+    token:
+    ompapikey:
+    yandexapikey:
+

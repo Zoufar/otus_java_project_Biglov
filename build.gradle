@@ -1,0 +1,55 @@
+plugins {
+    //support Idea IDE
+    id 'idea'
+    id "io.spring.dependency-management" version "1.0.10.RELEASE"
+}
+
+idea {
+    project {
+        languageLevel = 11
+    }
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+allprojects {
+    group "otus-java-project-Biglov"
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    apply plugin: "io.spring.dependency-management"
+    dependencyManagement {
+        dependencies{
+            imports {
+                mavenBom("org.springframework.boot:spring-boot-dependencies:2.4.5" +
+                        "")
+            }
+            dependency("org.testcontainers:junit-jupiter:${Versions.testcontainers}")
+
+        }
+    }
+
+    configurations.all {
+        resolutionStrategy {
+            failOnVersionConflict()
+        }
+        resolutionStrategy {
+            force("commons-logging:commons-logging:1.1.1")
+            force("commons-lang:commons-lang:2.5")
+
+        }
+    }
+}
+
+task managedVersions {
+    doLast {
+        dependencyManagement.managedVersions.each {
+            println it
+        }
+    }
+}
